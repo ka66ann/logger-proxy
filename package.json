@@ -1,0 +1,78 @@
+{
+  "name": "@3fv/logger-proxy",
+  "version": "1.0.68",
+  "description": "A logger proxy to enable hot swapping backends",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "init": "mkdir -p lib && cat package.json | jq 'del(.scripts)' > lib/package.json",
+    "build": "yarn run init && tsc -b tsconfig.json",
+    "build:watch": "yarn run build && cd lib && yarn unlink;yarn link && cd .. && yarn run build --watch",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "clean": "./scripts/clean.sh",
+    "postversion": "./scripts/release.sh latest",
+    "release": "yarn build  && yarn version --patch --non-interactive"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/3fv/logger-proxy.git"
+  },
+  "keywords": [
+    "typescript",
+    "logger",
+    "proxy"
+  ],
+  "files": [
+    "**/*.d.ts",
+    "**/*.js",
+    "**/*.map",
+    "package.json"
+  ],
+  "author": "Jonathan Glanz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/3fv/logger-proxy/issues"
+  },
+  "homepage": "https://github.com/3fv/logger-proxy#readme",
+  "dependencies": {
+    "@3fv/deferred": "^1.2.4",
+    "@3fv/guard": "^1",
+    "@3fv/prelude-ts": "^0.8.23",
+    "bluebird": "^3.7.2",
+    "chalk": "^4.1.2",
+    "debug": "^4.3.2",
+    "lodash": "^4.17.21"
+  },
+  "optionalDependencies": {},
+  "devDependencies": {
+    "@types/bluebird": "^3.5.36",
+    "@types/chalk": "^2.2.0",
+    "@types/debug": "^4.1.7",
+    "@types/faker": "^5.5.9",
+    "@types/jest": "^27.0.3",
+    "@types/lodash": "^4.14.176",
+    "@types/node": "^16.11.2",
+    "@types/shelljs": "^0.8.9",
+    "cross-env": "^7.0.3",
+    "faker": "^5.5.3",
+    "jest": "^27.4.0",
+    "lodash": "^4.17.21",
+    "prettier": "^2.4.1",
+    "semver": "^7.3.5",
+    "shelljs": "^0.8.4",
+    "source-map-support": "^0.5.20",
+    "supports-color": "^9.0.2",
+    "ts-jest": "27.0.7",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.4.4"
+  },
+  "resolutions": {
+    "chalk": "^4.1.2",
+    "ansi-regex": "^5.0.1",
+    "tmpl": "^1.0.5"
+  }
+}
